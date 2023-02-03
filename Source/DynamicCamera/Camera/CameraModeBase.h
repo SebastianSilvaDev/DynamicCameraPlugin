@@ -7,6 +7,7 @@
 #include "UObject/Object.h"
 #include "CameraModeBase.generated.h"
 
+class UDynamicCameraComponent;
 USTRUCT(BlueprintType)
 struct FCameraModeView
 {
@@ -38,6 +39,8 @@ public:
 	virtual UWorld* GetWorld() const override;
 
 	virtual AActor* GetTargetActor() const;
+
+	UDynamicCameraComponent* GetOuterAsDynamicCamera() const;
 
 	UFUNCTION(BlueprintGetter)
 	const FCameraModeView& GetCameraModeView() const { return View; }

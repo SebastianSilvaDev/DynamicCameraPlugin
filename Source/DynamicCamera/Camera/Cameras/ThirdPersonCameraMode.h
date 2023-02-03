@@ -20,6 +20,8 @@ class DYNAMICCAMERA_API UThirdPersonCameraMode : public UCameraModeBase
 protected:
 	virtual void UpdateView(float DeltaTime) override;
 
+	virtual void PreventCollision(float DeltaTime);
+
 	UPROPERTY(EditDefaultsOnly, Category="OffsetCurve")
 	const UCurveVector* TargetOffsetCurve;
 };

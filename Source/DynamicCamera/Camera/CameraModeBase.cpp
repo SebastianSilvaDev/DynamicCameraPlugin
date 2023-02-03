@@ -61,6 +61,11 @@ AActor* UCameraModeBase::GetTargetActor() const
 	return DynamicCameraComponent->GetOwner();
 }
 
+UDynamicCameraComponent* UCameraModeBase::GetOuterAsDynamicCamera() const
+{
+	return static_cast<UDynamicCameraComponent*>(GetOuter());
+}
+
 void UCameraModeBase::UpdateCameraMode(float DeltaTime)
 {
 	UpdateView(DeltaTime);
