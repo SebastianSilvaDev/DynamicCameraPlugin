@@ -11,6 +11,12 @@ void UThirdPersonCameraMode::UpdateView(float DeltaTime)
 	
 	if (!IsValid(TargetOffsetCurve)) return;
 	const FVector OffsetVector = TargetOffsetCurve->GetVectorValue(View.Rotation.Pitch);
+#if WITH_EDITOR
+	if (bEnableDebugMode)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Red, FString::Printf(TEXT("%f ===> %s"), View.Rotation.Pitch, *OffsetVector.ToString()));
+	}
+#endif
 	View.Location = View.Location + View.Rotation.RotateVector(OffsetVector);
 	PreventCollision(DeltaTime);
 }
@@ -23,5 +29,11 @@ void UThirdPersonCameraMode::PreventCollision(float DeltaTime)
 	const bool bHasHit = GetWorld()->SweepSingleByChannel(Hit, GetTargetActor()->GetActorLocation(), View.Location, FRotator::ZeroRotator.Quaternion(), ECC_Camera, SphereShape, QueryParams);
 	if (!bHasHit) return;
 	FVector Location = Hit.Location - View.Location;
-	View.Location = View.Location + Location;
+#if WITH_EDITOR
+	if (bEnableDebugMode)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Red, FString::Printf(TEXT("%s ===> %f"), *View.Location.ToString(), Hit.Distance));
+	}
+#endif
+	View.Location += Location;
 }

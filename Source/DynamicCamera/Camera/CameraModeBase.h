@@ -81,6 +81,11 @@ protected:
 
 	virtual void UpdateView(float DeltaTime);
 	virtual void UpdateBlending(float DeltaTime);
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditAnywhere, Category="Debug")
+	bool bEnableDebugMode = false;
+#endif
 	
 	UPROPERTY(EditDefaultsOnly, Category="Types", BlueprintGetter=GetCameraModeTypes)
 	FGameplayTagContainer CameraModeTypes;

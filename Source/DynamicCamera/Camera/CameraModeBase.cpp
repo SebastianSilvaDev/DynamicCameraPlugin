@@ -120,7 +120,7 @@ void UCameraModeBase::UpdateView(float DeltaTime)
 	FRotator PivotRotation;
 	GetPivotViewLocationAndRotation(PivotLocation, PivotRotation);
 
-	PivotRotation.Pitch = FMath::ClampAngle(PivotRotation.Pitch, ViewPitchMin, ViewPitchMax);
+	PivotRotation.Pitch = FMath::ClampAngle<float>(PivotRotation.Pitch, ViewPitchMin, ViewPitchMax);
 
 	View.Location = PivotLocation;
 	View.Rotation = PivotRotation;
